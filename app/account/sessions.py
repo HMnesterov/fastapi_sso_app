@@ -5,10 +5,10 @@ from fastapi import Response
 
 from core.settings import settings
 from .models import User, Session
-from ..utils import now
+from ..utils import now, generate_random_string
 
 
-async def add_session(response: Response, user: User):
+async def add_session(response: Response, user: User) -> None:
     """When log_in"""
     session_key = await generate_session_key()
     session = await Session.create(session_key=session_key,
@@ -19,7 +19,7 @@ async def add_session(response: Response, user: User):
 
 async def generate_session_key() -> str:
     """Generate unique session key"""
-    key = os.urandom(32).hex()
+    key = generate_random_string(32)
     while await Session.exists(session_key=key):
-        key = os.urandom(32).hex()
+        key = generate_random_string(32)
     return key

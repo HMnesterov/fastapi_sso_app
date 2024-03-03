@@ -16,4 +16,6 @@ class UserAuthPayload(BaseModel):
     password: str
 
 
+
+
 UserResponse = pydantic_model_creator(User, exclude=("hashed_password", "id"))

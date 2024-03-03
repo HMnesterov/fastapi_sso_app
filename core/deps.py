@@ -8,7 +8,8 @@ from .settings import settings
 async def init_db():
     await Tortoise.init(db_url=settings.DB_URL,
                         modules={
-                            "account": ["app.account.models"]
+                            "account": ["app.account.models"],
+                            "oauth2": ["app.oauth2.models"]
                             # "migrate": ["core.migrate"]
                         })
     await Tortoise.generate_schemas()

@@ -18,7 +18,7 @@ async def create_account(response: Response, user_payload: UserCreatePayload) ->
 
 
 @app.post("/login", response_model=UserResponse, status_code=200)
-async def login(response: Response, user_auth_payload: UserAuthPayload):
+async def login(response: Response, user_auth_payload: UserAuthPayload) -> UserResponse:
     """Do log_in"""
     user: User = await acc_service.get_user(dto=user_auth_payload)
     await add_session(response, user)
