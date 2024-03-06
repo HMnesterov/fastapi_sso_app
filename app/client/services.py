@@ -6,8 +6,8 @@ from starlette import status
 
 from app.account.models import User
 from app.account.services import make_password
-from app.oauth2.models import Client
-from app.oauth2.schemas import ClientPayload
+from app.client.models import Client
+from app.client.schemas import ClientPayload
 from app.utils import generate_random_string
 
 
