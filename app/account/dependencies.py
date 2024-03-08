@@ -5,7 +5,7 @@ from .models import User, Session
 from ..utils import now
 
 
-async def get_user_session(request: Request) -> User:
+async def get_current_user(request: Request) -> User:
     """Get user by his session or raise exception"""
     session_key = request.cookies.get("session_key")
     if session_key is None:
