@@ -5,7 +5,7 @@ from fastapi import Response
 
 from core.settings import settings
 from .models import User, Session
-from ..utils import now, generate_random_string
+from app.utils import now, generate_random_string
 
 
 async def add_session(response: Response, user: User) -> None:
