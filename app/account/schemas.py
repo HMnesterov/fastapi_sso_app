@@ -5,6 +5,7 @@ from .models import User
 
 
 class UserCreatePayload(BaseModel):
+    """User register payload"""
     email: EmailStr
     first_name: str = Field(min_length=1)
     last_name: str = Field(min_length=1)
@@ -12,6 +13,7 @@ class UserCreatePayload(BaseModel):
 
 
 class UserAuthPayload(BaseModel):
+    """User authentication payload"""
     email: EmailStr
     password: str
 

@@ -1,9 +1,8 @@
-from typing import Optional
-
 from pydantic_settings import BaseSettings
 
 
 class AppSettings(BaseSettings):
+    """Application settings class"""
     DB_URL: str
     # DB_MIGRATE_PATH: str
 

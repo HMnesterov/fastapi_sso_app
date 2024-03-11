@@ -2,6 +2,6 @@ from enum import Enum, StrEnum
 
 
 class TokenType(StrEnum):
-    access = "access"
-    refresh = "refresh"
-    undefined = "undefined"
+    ACCESS = "A"
+    REFRESH = "R"
+    UNDEFINED = "U"

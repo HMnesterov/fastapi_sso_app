@@ -1,11 +1,10 @@
-import os
 from datetime import timedelta
 
 from fastapi import Response
 
+from app.utils import now, generate_random_string
 from core.settings import settings
 from .models import User, Session
-from app.utils import now, generate_random_string
 
 
 async def add_session(response: Response, user: User) -> None:

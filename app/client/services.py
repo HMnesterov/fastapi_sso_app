@@ -3,10 +3,10 @@ from starlette import status
 
 from app.account.models import User
 from app.account.services import make_encrypted
-from app.client.models import Client
-from app.client.schemas import ClientPayload
 from app.utils import generate_random_string
 
+from .models import Client
+from .schemas import ClientPayload
 
 async def register_client(creator: User, dto: ClientPayload) -> Client:
     """Register new client and return client_secret_plain (only once)"""
@@ -19,12 +19,10 @@ async def register_client(creator: User, dto: ClientPayload) -> Client:
     return client
 
 
-async def get_client(client_id: str, user: User) -> Client:
-    client: Client = await Client.filter(client_id=client_id).select_related('owner').first()
+async def get_client_by_id(client_id: str) -> Client:
+    client = await Client.filter(client_id=client_id).first()
     if client is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-    if client.owner_id != user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
     return client
 
 

@@ -1,21 +1,19 @@
-import datetime
-from typing import Type, TypeVar
+from typing import TypeVar
 
 from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from starlette import status
-
-from app.oidc.schemas import TokenBaseModel
 from app.utils import now
 from core.settings import settings
+from .schemas import TokenBaseScheme
 
-baseTokenData = TypeVar(name="baseTokenData", bound=TokenBaseModel)
+base_token_scheme = TypeVar(name="base_token_scheme", bound=TokenBaseScheme)
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
-def create_jwt_token(token_data: baseTokenData) -> str:
+def create_jwt_token(token_data: base_token_scheme) -> str:
     """Generate new jwt token based on provided data"""
     # expire time of the token
     to_dict: dict = token_data.model_dump()

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, Depends
 
 from . import services as acc_service
-from .dependencies import get_current_user
+from .dependencies import get_session_user
 from .models import User
 from .schemas import UserCreatePayload, UserResponse, UserAuthPayload
 from .sessions import add_session
@@ -25,7 +25,7 @@ async def login(response: Response, user_auth_payload: UserAuthPayload) -> UserR
     return user
 
 
-@router.get("/me", response_model=UserResponse)
-async def get_user_info(user: User = Depends(get_current_user)) -> UserResponse:
+@router.get("/me", response_model=UserResponse, status_code=200)
+async def get_user_info(user: User = Depends(get_session_user)) -> UserResponse:
     """Receive information about user"""
     return user
