@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic_settings import BaseSettings
 
 
@@ -12,6 +14,7 @@ class AppSettings(BaseSettings):
     # jwt
     SECRET_KEY: str
     ALGORITHM: str
+    SESSION_COOKIE_NAME: Optional[str] = "session_key"
 
     class Config:
         env_file = "env/.env"

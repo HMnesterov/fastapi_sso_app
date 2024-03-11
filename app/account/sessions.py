@@ -13,7 +13,7 @@ async def add_session(response: Response, user: User) -> None:
     session = await Session.create(session_key=session_key,
                                    expire_at=now() + timedelta(days=settings.SESSION_LIFE),
                                    user=user)
-    response.set_cookie(key="session_key", value=session.session_key)
+    response.set_cookie(key=settings.SESSION_COOKIE_NAME, value=session.session_key)
 
 
 async def generate_session_key() -> str:
