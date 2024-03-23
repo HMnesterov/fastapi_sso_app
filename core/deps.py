@@ -2,7 +2,7 @@ from tortoise import Tortoise
 
 from .app import app
 from .settings import settings
-
+from .migrate import make_migrate
 
 @app.on_event("startup")
 async def init_db():
@@ -10,10 +10,10 @@ async def init_db():
     await Tortoise.init(db_url=settings.DB_URL,
                         modules={
                             "account": ["app.account.models"],
-                            "client": ["app.client.models"]
-                            # "migrate": ["core.migrate"]
+                            "client": ["app.client.models"],
+                            "migrate": ["core.migrate"]
                         })
-    await Tortoise.generate_schemas()
+    await make_migrate()
 
 
 @app.on_event("shutdown")
